@@ -35,6 +35,8 @@ let dy = -2;
 
 
 function draw() {
+    //clearing canvas 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     //drawing the circle
     ctx.beginPath();
     ctx.arc(x, y, 10, 0, Math.PI*2);
