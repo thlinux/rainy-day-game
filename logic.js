@@ -66,6 +66,8 @@ function draw() {
 
     //calling draw ball
     drawBall();
+    //calling draw paddle
+    drawPaddle();
 
     //changing the x and y value of the ball
     x += dx;
@@ -81,5 +83,13 @@ function draw() {
     if((y + dy) > (canvas.height - ballRadius) || (y + dy) < ballRadius) {
         //reverse
         dy = -dy;
+    }
+
+    //paddle movement
+    //if arrow pressed and inside the canvas then move the paddle 7 pixels left or right
+    if(rightPressed && paddleX < (canvas.width - paddleWidth)) {
+        paddleX += 7;
+    } else if(leftPressed && paddleX > 0) {
+        paddleX += -7;
     }
 }
