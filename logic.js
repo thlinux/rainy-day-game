@@ -24,7 +24,7 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 //calling draw funciton ever 10 miliseconds
-setInterval(draw, 10);
+let interval = setInterval(draw, 10);
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") { //finding if the right arrow key is pressed
@@ -80,9 +80,18 @@ function draw() {
         dx = -dx;
     }
     //if the position of the ball is lower than 0 or greater than the canvas height, reverse the movement
-    if((y + dy) > (canvas.height - ballRadius) || (y + dy) < ballRadius) {
+    if((y + dy) < ballRadius) {
         //reverse
         dy = -dy;
+    } else if ((y + dy) > (canvas.height - ballRadius)) { //if ball hits bottom then game over
+        if(x > paddleX && x < (paddleX + paddleWidth)) {
+            dy = -dy;
+        } else {
+            alert("GAME OVER");
+            document.location.reload();
+            clearInterval(interval); // Needed for Chrome to end game
+        }
+
     }
 
     //paddle movement
