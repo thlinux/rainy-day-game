@@ -15,10 +15,33 @@ let paddleHeight = 10;
 let paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2; //paddle starting point
 //user interaction
+let rightPressed = false;
+let leftPressed = false;
+
+
+//event listeners
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 
 //calling draw funciton ever 10 miliseconds
 setInterval(draw, 10);
 
+function keyDownHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") { //finding if the right arrow key is pressed
+        rightPressed = true;    //if so, then set coresponding var true
+    } else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+    } else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
+    }
+}
 
 function drawBall() {
     //drawing the circle
