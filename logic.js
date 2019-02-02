@@ -17,8 +17,25 @@ let paddleX = (canvas.width - paddleWidth) / 2; //paddle starting point
 //user interaction
 let rightPressed = false;
 let leftPressed = false;
+//brick properties
+let brickRowCount = 3;
+let brickColumnCount = 5;
+let brickWidth = 75;
+let brickHeight = 20;
+let brickPadding = 10;
+let brickOffsetTop = 30;
+let brickOffsetLeft = 30;
+//bricks
+let bricks = [];
 
+//creating brick objects in a 2d array
+for (let c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for(let r = 0; r < brickRowCount; r++) {
+        bricks[c][r] = { x: 0, y: 0}
+    }
 
+}
 //event listeners
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -43,6 +60,23 @@ function keyUpHandler(e) {
     }
 }
 
+function drawBricks() {
+    for(let c = 0; c < brickColumnCount; c++) {
+        for(let r = 0; r < brickRowCount; r++) {
+            let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+            let brickY = (r * (brickHeight+ brickPadding)) + brickOffsetTop;
+            bricks[c][r].x = brickX;
+            bricks[c][r].y = brickY;
+            ctx.beginPath();
+            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+
+        }
+    }
+}
+
 function drawBall() {
     //drawing the circle
     ctx.beginPath();
@@ -63,7 +97,8 @@ function drawPaddle() {
 function draw() {
     //clearing canvas 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    //calling draw bricks
+    drawBricks();
     //calling draw ball
     drawBall();
     //calling draw paddle
