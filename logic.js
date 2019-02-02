@@ -10,7 +10,11 @@ let dx = 2;
 let dy = -2;
 //ball properties
 let ballRadius = 10;
-
+//paddle properties
+let paddleHeight = 10;
+let paddleWidth = 75;
+let paddleX = (canvas.width - paddleWidth) / 2; //paddle starting point
+//user interaction
 
 //calling draw funciton ever 10 miliseconds
 setInterval(draw, 10);
@@ -20,6 +24,14 @@ function drawBall() {
     //drawing the circle
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+
+function drawPaddle() {
+    ctx.beginPath;
+    ctx.rect(paddleX, (canvas.height - paddleHeight), paddleWidth, paddleHeight);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
