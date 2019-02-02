@@ -38,12 +38,12 @@ function draw() {
 
     //collosion detection
     //if the position of the ball is lower than 0 or greater than the canvas width, reserve the movement
-    if(x + dx > canvas.width || x + dx < 0) {
+    if((x + dx) > (canvas.width - ballRadius) || (x + dx) < ballRadius) {
         //reverse
         dx = -dx;
     }
     //if the position of the ball is lower than 0 or greater than the canvas height, reverse the movement
-    if(y + dy > canvas.height || y + dy < 0) {
+    if((y + dy) > (canvas.height - ballRadius) || (y + dy) < ballRadius) {
         //reverse
         dy = -dy;
     }
