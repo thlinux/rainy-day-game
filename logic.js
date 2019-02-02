@@ -23,14 +23,29 @@ let ctx = canvas.getContext("2d");
 // ctx.stroke();
 // ctx.closePath();
 
-//animation testing
+//**** animation testing***
+
+//defining x and y positions
+let x = canvas.width/2;
+let y = canvas.height-30;
+
+//defining movement change value
+let dx = 2;
+let dy = -2;
+
 
 function draw() {
+    //drawing the circle
     ctx.beginPath();
-    ctx.arc(50, 50, 10, 0, Math.PI*2);
+    ctx.arc(x, y, 10, 0, Math.PI*2);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
+    
+    //changing the x and y value of the ball
+    x += dx;
+    y += dy;
 }
 
+//calling draw funciton ever 10 miliseconds
 setInterval(draw, 10);
