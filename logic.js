@@ -44,6 +44,7 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 //calling draw funciton ever 10 miliseconds
+//*********START OF GAME********** 
 let interval = setInterval(draw, 10);
 
 function keyDownHandler(e) {
@@ -113,6 +114,11 @@ function collosionDetection() {
                     dy = -dy;
                     b.status = 0;
                     score++;
+                    if(score == (brickColumnCount * brickRowCount)) {
+                        alert("WINNER WINNER CHICKEN DINNER!");
+                        document.location.reload();
+                        clearInterval(interval);
+                    }
                 }
             }   
         }
