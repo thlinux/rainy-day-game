@@ -27,6 +27,9 @@ let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 //bricks
 let bricks = [];
+//score
+let score = 0;
+
 
 //creating brick objects in a 2d array
 for (let c = 0; c < brickColumnCount; c++) {
@@ -95,6 +98,12 @@ function drawPaddle() {
     ctx.closePath();
 }
 
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: " + score, 8, 20);
+}
+
 function collosionDetection() {
     for(let c = 0; c < brickColumnCount; c++) {
         for(let r = 0; r < brickRowCount; r++) {
@@ -103,6 +112,7 @@ function collosionDetection() {
                 if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
                     dy = -dy;
                     b.status = 0;
+                    score++;
                 }
             }   
         }
@@ -120,6 +130,8 @@ function draw() {
     drawPaddle();
     //calling collesion detection
     collosionDetection();
+    //drawing score
+    drawScore();
     //changing the x and y value of the ball
     x += dx;
     y += dy;
