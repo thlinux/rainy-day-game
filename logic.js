@@ -2,8 +2,8 @@ let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 let x = canvas.width/2;
 let y = canvas.height-30;
-let dx = 2;
-let dy = -2;
+let dx = 4;
+let dy = -4;
 let ballRadius = 10;
 let paddleHeight = 10;
 let paddleWidth = 75;
@@ -147,12 +147,11 @@ function draw() {
             if(!lives) {
                 alert("GAME OVER");
                 document.location.reload();
-            }
-            else {
+            } else {
                 x = canvas.width / 2;
                 y = canvas.height - 30;
-                dx = 2;
-                dy = -2;
+                dx = 4;
+                dy = -4;
                 paddleX = (canvas.width - paddleWidth) / 2;
             }
         }
