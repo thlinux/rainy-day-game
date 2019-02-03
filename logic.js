@@ -42,9 +42,10 @@ for (let c = 0; c < brickColumnCount; c++) {
 //event listeners
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
 
 //calling draw funciton ever 10 miliseconds
-//*********START OF GAME********** 
+//*********START OF GAME**********  
 let interval = setInterval(draw, 10);
 
 function keyDownHandler(e) {
@@ -61,6 +62,14 @@ function keyUpHandler(e) {
         rightPressed = false;
     } else if(e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = false;
+    }
+}
+
+//adding mouse control support
+function mouseMoveHandler(e) {
+    let relativeX = e.clientX - canvas.offsetLeft;
+    if(relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - (paddleWidth / 2);
     }
 }
 
