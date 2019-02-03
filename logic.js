@@ -46,9 +46,9 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
-//calling draw funciton ever 10 miliseconds
+//calling draw funciton
 //*********START OF GAME**********  
-let interval = setInterval(draw, 10);
+draw();
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") { //finding if the right arrow key is pressed
@@ -134,7 +134,6 @@ function collosionDetection() {
                     if(score == (brickColumnCount * brickRowCount)) {
                         alert("WINNER WINNER CHICKEN DINNER!");
                         document.location.reload();
-                        clearInterval(interval);
                     }
                 }
             }   
@@ -155,6 +154,8 @@ function draw() {
     collosionDetection();
     //drawing score
     drawScore();
+    //drawing lives
+    drawLives();
     //changing the x and y value of the ball
     x += dx;
     y += dy;
@@ -177,7 +178,6 @@ function draw() {
             if(!lives) {
                 alert("GAME OVER");
                 document.location.reload();
-                clearInterval(interval); // Needed for Chrome to end game
             }
             else {
                 x = canvas.width / 2;
@@ -197,4 +197,5 @@ function draw() {
     } else if(leftPressed && paddleX > 0) {
         paddleX += -7;
     }
+    requestAnimationFrame(draw);
 }
