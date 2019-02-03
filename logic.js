@@ -1,23 +1,15 @@
-//grabbing a reference to the canvas
 let canvas = document.getElementById("myCanvas");
-//storing the 2d rendering context
 let ctx = canvas.getContext("2d");
-//defining x and y positions
 let x = canvas.width/2;
 let y = canvas.height-30;
-//defining movement change value
 let dx = 2;
 let dy = -2;
-//ball properties
 let ballRadius = 10;
-//paddle properties
 let paddleHeight = 10;
 let paddleWidth = 75;
-let paddleX = (canvas.width - paddleWidth) / 2; //paddle starting point
-//user interaction
+let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
-//brick properties
 let brickRowCount = 3;
 let brickColumnCount = 5;
 let brickWidth = 75;
@@ -25,15 +17,10 @@ let brickHeight = 20;
 let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
-//bricks
 let bricks = [];
-//score
 let score = 0;
-//lives
 let lives = 3;
 
-
-//creating brick objects in a 2d array
 for (let c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
     for(let r = 0; r < brickRowCount; r++) {
@@ -41,18 +28,16 @@ for (let c = 0; c < brickColumnCount; c++) {
     }
 
 }
-//event listeners
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
-//calling draw funciton
 //*********START OF GAME**********  
 draw();
 
 function keyDownHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") { //finding if the right arrow key is pressed
-        rightPressed = true;    //if so, then set coresponding var true
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = true;
     } else if(e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = true;
 
@@ -67,7 +52,6 @@ function keyUpHandler(e) {
     }
 }
 
-//adding mouse control support
 function mouseMoveHandler(e) {
     let relativeX = e.clientX - canvas.offsetLeft;
     if(relativeX > 0 && relativeX < canvas.width) {
@@ -94,7 +78,6 @@ function drawBricks() {
 }
 
 function drawBall() {
-    //drawing the circle
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
     ctx.fillStyle = "#0095DD";
@@ -142,35 +125,21 @@ function collosionDetection() {
 }
 
 function draw() {
-    //clearing canvas 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //calling draw bricks
     drawBricks();
-    //calling draw ball
     drawBall();
-    //calling draw paddle
     drawPaddle();
-    //calling collesion detection
     collosionDetection();
-    //drawing score
     drawScore();
-    //drawing lives
     drawLives();
-    //changing the x and y value of the ball
     x += dx;
     y += dy;
 
-    //collosion detection
-    //if the position of the ball is lower than 0 or greater than the canvas width, reserve the movement
-    if((x + dx) > (canvas.width - ballRadius) || (x + dx) < ballRadius) {
-        //reverse
+    if ((x + dx) > (canvas.width - ballRadius) || (x + dx) < ballRadius) {
         dx = -dx;
-    }
-    //if the position of the ball is lower than 0 or greater than the canvas height, reverse the movement
-    if((y + dy) < ballRadius) {
-        //reverse
+    } else if ((y + dy) < ballRadius) {
         dy = -dy;
-    } else if ((y + dy) > (canvas.height - ballRadius)) { //if ball hits bottom then game over
+    } else if ((y + dy) > (canvas.height - ballRadius)) {
         if(x > paddleX && x < (paddleX + paddleWidth)) {
             dy = -dy;
         } else {
@@ -190,8 +159,6 @@ function draw() {
 
     }
 
-    //paddle movement
-    //if arrow pressed and inside the canvas then move the paddle 7 pixels left or right
     if(rightPressed && paddleX < (canvas.width - paddleWidth)) {
         paddleX += 7;
     } else if(leftPressed && paddleX > 0) {
