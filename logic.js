@@ -29,6 +29,8 @@ let brickOffsetLeft = 30;
 let bricks = [];
 //score
 let score = 0;
+//lives
+let lives = 3;
 
 
 //creating brick objects in a 2d array
@@ -114,6 +116,12 @@ function drawScore() {
     ctx.fillText("Score: " + score, 8, 20);
 }
 
+function drawLives() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+}
+
 function collosionDetection() {
     for(let c = 0; c < brickColumnCount; c++) {
         for(let r = 0; r < brickRowCount; r++) {
@@ -165,9 +173,19 @@ function draw() {
         if(x > paddleX && x < (paddleX + paddleWidth)) {
             dy = -dy;
         } else {
-            alert("GAME OVER");
-            document.location.reload();
-            clearInterval(interval); // Needed for Chrome to end game
+            lives--;
+            if(!lives) {
+                alert("GAME OVER");
+                document.location.reload();
+                clearInterval(interval); // Needed for Chrome to end game
+            }
+            else {
+                x = canvas.width / 2;
+                y = canvas.height - 30;
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width - paddleWidth) / 2;
+            }
         }
 
     }
